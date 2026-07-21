@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Lucky Spin Wheel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="app-shell">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">Premium Lucky Experience</p>
+          <h1>Lucky Spin Wheel</h1>
+        </div>
+        <div class="top-actions">
+          <button id="soundToggle" class="icon-btn" aria-label="Toggle sound">Sound</button>
+          <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">Theme</button>
+          <button id="fullscreenBtn" class="icon-btn" aria-label="Toggle fullscreen">Full</button>
+          <button id="resetBtn" class="icon-btn" aria-label="Reset wheel">Reset</button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="card hero-card">
+          <div class="wheel-wrap">
+            <div class="pointer" id="pointer"></div>
+            <div class="wheel-glow"></div>
+            <canvas id="wheelCanvas"></canvas>
+            <button id="spinBtn" class="spin-btn">SPIN NOW</button>
+          </div>
+          <div class="status-panel">
+            <div class="status-pill" id="statusPill">Ready to spin</div>
+            <div class="status-ribbon">
+              <span>Today's Fortune</span>
+              <strong id="currentRewardLabel">—</strong>
+            </div>
+          </div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="card stats-card">
+            <div class="card-head">
+              <h2>Live Statistics</h2>
+              <button id="resetStatsBtn" class="ghost-btn">Reset Stats</button>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <span>Total Spins</span>
+                <strong id="totalSpins">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Total Wins</span>
+                <strong id="totalWins">0</strong>
+              </div>
+              <div class="stat-box">
+                <span>Last Reward</span>
+                <strong id="lastReward">—</strong>
+              </div>
+              <div class="stat-box">
+                <span>Most Frequent</span>
+                <strong id="mostFrequent">—</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="card history-card">
+            <div class="card-head">
+              <h2>Spin History</h2>
+              <button id="exportHistoryBtn" class="ghost-btn">Export JSON</button>
+            </div>
+            <ul id="historyList" class="history-list"></ul>
+          </section>
+        </aside>
+      </main>
+
+      <section class="bottom-row">
+        <section class="card management-card">
+          <div class="card-head">
+            <h2>Reward Management</h2>
+            <div class="head-actions">
+              <button id="randomColorsBtn" class="ghost-btn">Random Colors</button>
+              <button id="importRewardsBtn" class="ghost-btn">Import Rewards</button>
+            </div>
+          </div>
+
+          <form id="rewardForm" class="reward-form">
+            <div class="field-group">
+              <label for="rewardLabel">Reward label</label>
+              <input id="rewardLabel" name="rewardLabel" type="text" maxlength="24" placeholder="Enter reward" required />
+            </div>
+            <div class="field-group">
+              <label for="rewardColor">Segment color</label>
+              <input id="rewardColor" name="rewardColor" type="color" value="#5ee7ff" />
+            </div>
+            <div class="field-group field-inline">
+              <label for="spinDuration">Spin Duration (s)</label>
+              <input id="spinDuration" name="spinDuration" type="range" min="3" max="12" step="0.5" value="6.5" />
+              <span id="spinDurationValue">6.5s</span>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="primary-btn">Save Reward</button>
+              <button type="button" id="cancelEditBtn" class="ghost-btn">Cancel</button>
+            </div>
+          </form>
+
+          <input id="importFile" type="file" accept="application/json" hidden />
+        </section>
+
+        <section class="card rewards-card">
+          <div class="card-head">
+            <h2>Prize List</h2>
+            <p>Manage segments and colors</p>
+          </div>
+          <ul id="rewardList" class="reward-list"></ul>
+        </section>
+      </section>
+    </div>
+
+    <div id="winnerModal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-card">
+        <button id="closeModalBtn" class="modal-close" aria-label="Close modal">×</button>
+        <div class="modal-icon" aria-hidden="true"></div>
+        <h2>You Won!</h2>
+        <p id="winnerText" class="winner-text"></p>
+        <div id="winnerBadge" class="winner-badge"></div>
+        <div class="modal-actions">
+          <button id="continueBtn" class="primary-btn">Continue</button>
+          <button id="autoCloseBtn" class="ghost-btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Crafted with HTML5, CSS3, and Vanilla JavaScript by a premium web experience studio</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
